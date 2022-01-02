@@ -1,12 +1,17 @@
 package com.akhil.ipldashboard.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.akhil.ipldashboard.model.Match;
 import com.akhil.ipldashboard.model.Team;
 import com.akhil.ipldashboard.repository.MatchRepository;
 import com.akhil.ipldashboard.repository.TeamRepository;
@@ -39,6 +44,24 @@ public class TeamController {
 		log.info("Team Data for Latest 4 Matches: "+team);
 		return team;
 	}
+
+	@GetMapping("/team/{teamName}/matches")
+	public  List<Match> getMatchesForTeam(@PathVariable String teamName , @RequestParam int year){
+		
+		log.info("inside getMatchesForTeam :: ");
+		
+		LocalDate startDate = LocalDate.of(year, 1, 1);
+		log.info("startDate :: "+startDate);
+		LocalDate endDate = LocalDate.of(year + 1, 1, 1);
+		log.info("endDate :: "+endDate);
+		
+		List<Match> matchDataByteam = this.matchRepository.getByTeam1AndDateBetweenOrTeam2AndDateBetweenOrderByDateDesc(
+				teamName, startDate, endDate,
+				teamName, startDate, endDate);
+		log.info("matchDataByteam :: "+matchDataByteam);
+		return matchDataByteam;
 	
-	
+
+	}	
+
 }
