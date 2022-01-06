@@ -49,15 +49,14 @@ public class TeamController {
 	public  List<Match> getMatchesForTeam(@PathVariable String teamName , @RequestParam int year){
 		
 		log.info("inside getMatchesForTeam :: ");
-		
+		log.info("teamName :: "+teamName);
+		log.info(" year :: "+year);
 		LocalDate startDate = LocalDate.of(year, 1, 1);
 		log.info("startDate :: "+startDate);
 		LocalDate endDate = LocalDate.of(year + 1, 1, 1);
 		log.info("endDate :: "+endDate);
 		
-		List<Match> matchDataByteam = this.matchRepository.getByTeam1AndDateBetweenOrTeam2AndDateBetweenOrderByDateDesc(
-				teamName, startDate, endDate,
-				teamName, startDate, endDate);
+		List<Match> matchDataByteam = this.matchRepository.getMatchesByTeamBetweenDates( teamName, startDate, endDate);
 		log.info("matchDataByteam :: "+matchDataByteam);
 		return matchDataByteam;
 	
