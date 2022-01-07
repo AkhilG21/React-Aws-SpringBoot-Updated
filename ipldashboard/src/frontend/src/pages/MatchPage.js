@@ -1,7 +1,9 @@
 import { React, useEffect , useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { MatchDetailsCard } from '../component/MatchDetailsDard';
+import { YearSelector } from '../component/YearSelector';
 
+import "./MatchPage.scss";
 export const MatchPage = () => {
 
 const [matches ,setMatches] = useState([]);
@@ -19,19 +21,22 @@ useEffect(
 
     fetchMatches();
 
-  } ,[] //Call this if teamName changes....([] is if you want to load only 1 time)
+  } ,[teamName ,year] //Call this if teamName changes....([] is if you want to load only 1 time)
   );
 
   console.log("Inside MatchPage Log");
 
   return (
     <div className="MatchPage">
+      <div className = "year-selector" >
+        <YearSelector teamName = {teamName}/>
+      </div>
+      <div>
       <h1>Match Page</h1>
-
-      {
-        matches.map(match => <MatchDetailsCard teamName={teamName} match={match} />)
-      }
-
+        {
+          matches.map(match => <MatchDetailsCard teamName={teamName} match={match} />)
+        }
+      </div>
     </div>
   );
 }
