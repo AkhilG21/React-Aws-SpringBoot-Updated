@@ -34,6 +34,12 @@ public class TeamController {
 		this.matchRepository = matchRepository;
 	}
 
+	@GetMapping("/team")
+	public Iterable<Team> getAllTeam(){
+		log.info("Inside get All Team data");
+		return this.teamRepository.findAll();
+	}
+	
 	@GetMapping("/team/{teamName}")
 	public Team getTeam(@PathVariable String teamName) {
 		//log.info("Team Name : "+teamName);

@@ -29,10 +29,11 @@ useEffect(
   return (
     <div className="MatchPage">
       <div className = "year-selector" >
+        <h3> Select Year </h3>
         <YearSelector teamName = {teamName}/>
       </div>
       <div>
-      <h1>Match Page</h1>
+      <h1 className = "page-heading" >{teamName} matches played in {year}</h1>
         {
           matches.map(match => <MatchDetailsCard teamName={teamName} match={match} />)
         }

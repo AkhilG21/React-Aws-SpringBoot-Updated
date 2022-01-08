@@ -1,6 +1,6 @@
 import { React } from 'react';
 import { Link } from 'react-router-dom';
-import "./MatchDetailsCard.scss";
+import './MatchDetailsCard.scss';
 
 export const MatchDetailsCard = ({teamName ,match}) => {
 
